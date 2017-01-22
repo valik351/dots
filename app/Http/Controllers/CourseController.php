@@ -19,6 +19,7 @@ class CourseController extends Controller
             'course' => Course::findOrFail($id),
             'pay_button_html' => $liqpay->cnb_form([
                 'action'         => 'pay',
+                'sandbox'        => '1',
                 'amount'         => $course->price,
                 'currency'       => 'UAH',
                 'description'    => $course->name,
