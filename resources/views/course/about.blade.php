@@ -12,7 +12,7 @@
                     {!! $course->content !!}
                 </div>
                 <div class="panel-footer">
-                    <a class="btn btn-success " href="{{ $course->about_link }}">Купить</a>
+                    <a class="btn btn-success" href="{{ $course->buy_link }}">Купить</a>
                 </div>
             </div>
         </div>

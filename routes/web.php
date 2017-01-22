@@ -15,6 +15,8 @@ Route::get('/', 'HomeController@index');
 
 Route::group(['prefix' => 'course'], function () {
     Route::get('{id}/about', 'CourseController@about');
+    Route::get('{id}/buy', 'CourseController@buy');
+    Route::get('{id}/pay', 'CourseController@pay');
 });
 
 Auth::routes();
