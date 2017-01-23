@@ -19,5 +19,9 @@ Route::group(['prefix' => 'course'], function () {
     Route::get('{id}/pay', 'CourseController@pay');
 });
 
+Route::group(['prefix' => 'transaction'], function () {
+    Route::any('callback', 'TransactionController@callback');
+});
+
 Auth::routes();
 
