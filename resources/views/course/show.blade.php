@@ -3,9 +3,9 @@
 @section('content')
     <div class="container">
         <div class="row">
-            @foreach(App\Course::all() as $course)
-                <div class="col-md-4">
-                    @include('partial.course_preview', ['course' => $course])
+            @foreach($course->modules as $module)
+                <div class="col-xs-12">
+                    @include('partial.module_preview', ['module' => $module])
                 </div>
             @endforeach
         </div>

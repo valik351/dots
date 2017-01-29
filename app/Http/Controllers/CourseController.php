@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+    public function show(Request $request, $id) {
+        return view('course.show', ['course' => Course::findOrFail($id) ]);
+    }
+
     public function about(Request $request, $id) {
         return view('course.about', ['course' => Course::findOrFail($id) ]);
     }

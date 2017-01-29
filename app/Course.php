@@ -18,7 +18,15 @@ class Course extends Model
         return action('CourseController@buy', ['id' => $this->id]);
     }
 
+    public function getLinkAttribute() {
+        return action('CourseController@show', ['id' => $this->id]);
+    }
+
     public function getPriceAttribute() {
         return Exchange::rate() * $this->attributes['price'];
+    }
+
+    public function modules() {
+        return $this->hasMany(Module::class);
     }
 }

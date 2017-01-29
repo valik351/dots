@@ -14,9 +14,13 @@
 Route::get('/', 'HomeController@index');
 
 Route::group(['prefix' => 'course'], function () {
+    Route::get('{id}', 'CourseController@show');
     Route::get('{id}/about', 'CourseController@about');
     Route::get('{id}/buy', 'CourseController@buy');
-    Route::get('{id}/pay', 'CourseController@pay');
+});
+
+Route::group(['prefix' => 'module'], function () {
+    Route::get('{id}', 'ModuleController@show');
 });
 
 Route::group(['prefix' => 'transaction'], function () {
