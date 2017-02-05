@@ -15,6 +15,8 @@ class CreateModuleProblemTable extends Migration
     {
         Schema::create('module_problem', function (Blueprint $table) {
 
+            $table->string('display_id');
+
             $table->unsignedInteger('module_id');
             $table->unsignedInteger('problem_id');
 

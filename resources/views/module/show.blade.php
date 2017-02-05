@@ -16,27 +16,24 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($module->problems as $problem)
                     <tr>
-                        <th style="text-align: center;">A</th>
-                        <td><a href="#">A плюс B - experimental</a></td>
-                        <td style="text-align: center;"><i class="glyphicon glyphicon-star" ></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i></td>
-                        <td class="danger" style="text-align: center;"><a href="#">WA</a></td>
-                        <td style="text-align: center;"><a href="#">50</a></td>
+                        <th style="text-align: center;">{{ $problem->display_id }}</th>
+                        <td><a href="#">{{ $problem->name }}</a></td>
+                        <td style="text-align: center;">
+                            @for($i = 0; $i < $problem->difficulty; $i++)
+                                <i class="glyphicon glyphicon-star" ></i>
+                            @endfor
+                        </td>
+                        @if($problem->lastSolution)
+                            <td class="{{ $problem->lastSolution->status == App\Solution::STATUS_OK ? 'success' : 'danger' }}" style="text-align: center;"><a href="#">{{ $problem->lastSolution->status }}</a></td>
+                            <td style="text-align: center;"><a href="#">{{ $problem->lastSolution->success_percentage }}</a></td>
+                        @else
+                            <td style="text-align: center;"><a href="#">-</a></td>
+                            <td style="text-align: center;"><a href="#">-</a></td>
+                        @endif
                     </tr>
-                    <tr>
-                        <th style="text-align: center;">B</th>
-                        <td><a href="#">Подготовка</a></td>
-                        <td style="text-align: center;"><i class="glyphicon glyphicon-star" ></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i></td>
-                        <td class="success" style="text-align: center;"><a href="#">OK</a></td>
-                        <td style="text-align: center;"><a href="#">100</a></td>
-                    </tr>
-                    <tr>
-                        <th style="text-align: center;">C</th>
-                        <td><a href="#">Палиндром</a></td>
-                        <td style="text-align: center;"><i class="glyphicon glyphicon-star" ></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i><i class="glyphicon glyphicon-star"></i></td>
-                        <td style="text-align: center;">-</td>
-                        <td style="text-align: center;">-</td>
-                    </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

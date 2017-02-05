@@ -20,7 +20,7 @@ class CreateSolutionsTable extends Migration
             $table->string('message')->nullable();
 
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('contest_id');
+            $table->unsignedInteger('module_id');
 
             $table->unsignedTinyInteger('success_percentage')->nullable();
             $table->boolean('reviewed')->nullable()->default(null);
@@ -28,12 +28,6 @@ class CreateSolutionsTable extends Migration
             $table->unsignedInteger('problem_id');
             $table->foreign('problem_id')
                 ->references('id')->on('problems')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
-
-            $table->unsignedInteger('client_id');
-            $table->foreign('client_id')
-                ->references('id')->on('clients')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
