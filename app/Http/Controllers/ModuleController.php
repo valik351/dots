@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 class ModuleController extends Controller
 {
     public function show(Request $request, $id) {
-        return view('module.show', ['module' => Module::findOrFail($id) ]);
+        return view('module.show', [
+            'module' => Module::findOrFail($id),
+        ]);
     }
 }
