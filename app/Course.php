@@ -38,15 +38,15 @@ class Course extends Model
     use SoftDeletes;
 
     public function getAboutLinkAttribute() {
-        return action('CourseController@about', ['id' => $this->id]);
+        return action('CourseController@about', ['course_id' => $this->id]);
     }
 
     public function getBuyLinkAttribute() {
-        return action('CourseController@buy', ['id' => $this->id]);
+        return action('CourseController@buy', ['course_id' => $this->id]);
     }
 
     public function getLinkAttribute() {
-        return action('CourseController@show', ['id' => $this->id]);
+        return action('CourseController@show', ['course_id' => $this->id]);
     }
 
     public function getPriceAttribute() {

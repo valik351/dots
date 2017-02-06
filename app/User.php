@@ -76,7 +76,21 @@ class User extends Authenticatable
         return $this->belongsToMany(Course::class);
     }
 
+    public function solutions() {
+        return $this->hasMany(Solution::class);
+    }
+
     public function hasAccessToCourse(Course $course) {
         return (bool)$this->courses()->find($course->id);
+    }
+
+    public function hasRole($roles)
+    {
+        if (is_array($roles)) {
+            return array_search($this->role, $roles) !== false;
+        } else {
+            return $this->role == $roles;
+        }
+
     }
 }

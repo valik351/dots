@@ -106,6 +106,14 @@ class Problem extends Model
             ->first();
     }
 
+    public function getLinkAttribute() {
+        return action('ProblemController@show', [
+            'problem_id' => $this->id,
+            'module_id'  => \Request::route()->parameters()['module_id'],
+            'course_id'  => \Request::route()->parameters()['course_id'],
+        ]);
+    }
+
     public function setArchive($name)
     {
         if (Input::file($name)->isValid()) {

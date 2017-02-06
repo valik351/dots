@@ -113,10 +113,18 @@ class Solution extends Model
     public static function getValidationRules($contest_id)
     {
         return [
-            'programming_language' => 'required|exists:contest_programming_language,programming_language_id,contest_id,' . $contest_id,
+            'programming_language' => 'required|exists:module_programming_language,programming_language_id,module_id,' . $contest_id,
             'solution_code' => 'required_without:solution_code_file',
             'solution_code_file' => 'required_without:solution_code|mimetypes:text/plain',
         ];
+    }
+
+    public function getLinkAttribute() {
+        return action('SolutionController@show', [
+            'solution_id' => $this->id,
+            'module_id'   => \Request::route()->parameters()['module_id'],
+            'course_id'   => \Request::route()->parameters()['course_id'],
+        ]);
     }
 
     /*
@@ -174,18 +182,7 @@ class Solution extends Model
 
     public function getPoints()
     {
-        $select = DB::table('contest_problem')
-            ->join('contest_solution', 'contest_problem.contest_id', '=', 'contest_solution.contest_id')
-            ->join('solutions', function ($join) {
-                $join->on('solutions.problem_id', '=', 'contest_problem.problem_id')
-                    ->on('contest_solution.solution_id', '=', 'solutions.id');
-            })
-            ->where('solution_id', $this->attributes['id'])
-            ->select('max_points')->first();
-        if ($select) {
-            return $this->attributes['success_percentage'] / 100 * $select->max_points;
-        }
-        return null;
+        return $this->attributes['success_percentage'];
     }
 
     public static function getStatusDescriptions()

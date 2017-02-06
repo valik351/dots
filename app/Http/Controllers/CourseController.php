@@ -8,23 +8,23 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    public function show(Request $request, $id) {
-        return view('course.show', ['course' => Course::findOrFail($id) ]);
+    public function show(Request $request, $course_id) {
+        return view('course.show', ['course' => Course::findOrFail($course_id) ]);
     }
 
-    public function about(Request $request, $id) {
-        return view('course.about', ['course' => Course::findOrFail($id) ]);
+    public function about(Request $request, $course_id) {
+        return view('course.about', ['course' => Course::findOrFail($course_id) ]);
     }
 
-    public function buy(Request $request, $id) {
+    public function buy(Request $request, $course_id) {
         $liqpay = new \LiqPay('i85422102906', '6K7J4sRA5osDvZJExtAsbVdP3wORLhr4MqZei1jy');
-        $course = Course::findOrFail($id);
+        $course = Course::findOrFail($course_id);
 
         $transaction = new Transaction();
         $transaction->save();
 
         return view('course.buy', [
-            'course' => Course::findOrFail($id),
+            'course' => $course,
             'pay_button_html' => $liqpay->cnb_form([
                 'action'         => 'pay',
                 'sandbox'        => '1',

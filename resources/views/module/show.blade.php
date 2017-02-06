@@ -18,19 +18,19 @@
                     <tbody>
                     @foreach($module->problems as $problem)
                     <tr>
-                        <th style="text-align: center;">{{ $problem->display_id }}</th>
-                        <td><a href="#">{{ $problem->name }}</a></td>
+                        <th style="text-align: center;">{{ $problem->pivot->display_id }}</th>
+                        <td><a href="{{ $problem->link }}">{{ $problem->name }}</a></td>
                         <td style="text-align: center;">
                             @for($i = 0; $i < $problem->difficulty; $i++)
                                 <i class="glyphicon glyphicon-star" ></i>
                             @endfor
                         </td>
                         @if($problem->lastSolution)
-                            <td class="{{ $problem->lastSolution->status == App\Solution::STATUS_OK ? 'success' : 'danger' }}" style="text-align: center;"><a href="#">{{ $problem->lastSolution->status }}</a></td>
-                            <td style="text-align: center;"><a href="#">{{ $problem->lastSolution->success_percentage }}</a></td>
+                            <td class="{{ $problem->lastSolution->status == App\Solution::STATUS_OK ? 'success' : 'danger' }}" style="text-align: center;"><a href="{{ $problem->lastSolution->link }}">{{ $problem->lastSolution->status }}</a></td>
+                            <td style="text-align: center;"><a href="{{ $problem->lastSolution->link }}">{{ $problem->lastSolution->success_percentage }}</a></td>
                         @else
-                            <td style="text-align: center;"><a href="#">-</a></td>
-                            <td style="text-align: center;"><a href="#">-</a></td>
+                            <td style="text-align: center;">-</td>
+                            <td style="text-align: center;">-</td>
                         @endif
                     </tr>
                     @endforeach

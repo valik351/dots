@@ -28,11 +28,18 @@ use Illuminate\Database\Eloquent\Model;
 class Module extends Model
 {
     public function getLinkAttribute() {
-        return action('ModuleController@show', ['id' => $this->id]);
+        return action('ModuleController@show', [
+            'module_id' => $this->id,
+            'course_id' => \Request::route()->parameters()['course_id']
+        ]);
     }
 
     public function problems() {
         return $this->belongsToMany(Problem::class)->withPivot('display_id');
+    }
+
+    public function programmingLanguages() {
+        return $this->belongsToMany(ProgrammingLanguage::class);
     }
 
 }

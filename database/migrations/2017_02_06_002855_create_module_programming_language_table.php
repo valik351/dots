@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModuleProblemTable extends Migration
+class CreateModuleProgrammingLanguageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,25 +13,20 @@ class CreateModuleProblemTable extends Migration
      */
     public function up()
     {
-        Schema::create('module_problem', function (Blueprint $table) {
-
-            $table->string('display_id');
-
+        Schema::create('module_programming_language', function (Blueprint $table) {
             $table->unsignedInteger('module_id');
-            $table->unsignedInteger('problem_id');
+            $table->unsignedInteger('programming_language_id');
 
             $table->foreign('module_id')
                 ->references('id')->on('modules')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
-
-            $table->foreign('problem_id')
-                ->references('id')->on('problems')
+            $table->foreign('programming_language_id')
+                ->references('id')->on('programming_languages')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
-
-            $table->unique(['module_id', 'problem_id']);
+            $table->unique(['module_id', 'programming_language_id'], 'module_programming_language_unique');
         });
     }
 
@@ -42,6 +37,6 @@ class CreateModuleProblemTable extends Migration
      */
     public function down()
     {
-        Schema::drop('module_problem');
+        Schema::drop('module_programming_language');
     }
 }
