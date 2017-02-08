@@ -25,6 +25,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('access-role-routes', function ($user, $roles) {
+            $roles = is_array($roles) ? $roles : array_slice(func_get_args(), 1);
+            return $user->hasRole($roles);
+        });
     }
 }

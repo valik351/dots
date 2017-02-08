@@ -49,6 +49,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth.api_custom' => ApiAuth::class,
         'auth' => \Illuminate\Auth\Middleware\Authenticate::class,
+        'access' => \App\Http\Middleware\Access::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
