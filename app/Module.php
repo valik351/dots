@@ -27,6 +27,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Module extends Model
 {
+    protected $fillable = ['course_id', 'name', 'description'];
+
     public function getLinkAttribute() {
         return action('ModuleController@show', [
             'module_id' => $this->id,

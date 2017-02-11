@@ -37,6 +37,8 @@ class Course extends Model
 {
     use SoftDeletes;
 
+    protected $fillable = ['name', 'description', 'content', 'duration', 'price'];
+
     public function getAboutLinkAttribute() {
         return action('CourseController@about', ['course_id' => $this->id]);
     }
