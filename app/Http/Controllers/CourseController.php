@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
 {

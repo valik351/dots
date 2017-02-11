@@ -28,3 +28,7 @@ Route::group(['namespace' => 'Api'], function() {
         Route::get('/programming-languages', 'ProgrammingLanguageController@index');
     });
 });
+
+Route::group(['prefix' => 'transaction'], function () {
+    Route::any('callback', 'TransactionController@callback');
+});
