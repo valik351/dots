@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Course;
 use App\Transaction;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class CourseController extends Controller
 {
@@ -18,7 +17,7 @@ class CourseController extends Controller
     }
 
     public function buy(Request $request, $course_id) {
-        $liqpay = new \LiqPay('i85422102906', '6K7J4sRA5osDvZJExtAsbVdP3wORLhr4MqZei1jy');
+        $liqpay = new \LiqPay(env('LIQPAY_PUBLIC_KEY'), env('LIQPAY_PRIVATE_KEY'));
         $course = Course::findOrFail($course_id);
 
         $transaction = new Transaction();
