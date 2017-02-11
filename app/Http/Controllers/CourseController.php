@@ -33,7 +33,7 @@ class CourseController extends Controller
                 'description'    => $course->name,
                 'order_id'       => $transaction->id,
                 'version'        => '3',
-                'server_url'     => action('TransactionController@callback')
+                'server_url'     => action('TransactionController@callback'),
             ])
         ]);
     }
