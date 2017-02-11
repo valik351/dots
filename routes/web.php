@@ -30,10 +30,10 @@ Route::group(['middleware' => 'access:web,1,'], function () {
 
         });
     });
-    Route::group(['prefix' => 'transaction'], function () {
-        Route::any('callback', 'TransactionController@callback');
-    });
+
 });
 Route::get('/', 'HomeController@index');
 Auth::routes();
-
+Route::group(['prefix' => 'transaction'], function () {
+    Route::any('callback', 'TransactionController@callback');
+});

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Log;
 class TransactionController extends Controller
 {
     public function callback(Request $request) {
-        Log::info(print_r($request, true));
+        Log::info(print_r($request->all(), true));
         $transaction = Transaction::findOrFail($request->order_id);
         $transaction->fill($request->all());
         $transaction->save();
