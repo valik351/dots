@@ -8,15 +8,17 @@ use Illuminate\Support\Facades\Log;
 
 class TransactionController extends Controller
 {
-    public function callback(Request $request) {
+    public function callback(Request $request)
+    {
         Log::info(print_r($request->all(), true));
-        $liqpay = new \LiqPay(env('LIQPAY_PUBLIC_KEY'), env('LIQPAY_PRIVATE_KEY'));
-        $data = json_decode(base64_decode($request->data), true);
-        if($liqpay->cnb_signature($data) !== $request->signature) {
+        $private_key = env('LIQPAY_PRIVATE_KEY');
+
+        if (base64_encode(sha1($private_key . $request->data . $private_key)) !== $request->signature) {
             abort(403, 'Forbidden');
         }
+        Log::info(json_decode(base64_decode($request->data), true));
         $transaction = Transaction::findOrFail($request->order_id);
-        $transaction->fill($data);
+        $transaction->fill(json_decode(base64_decode($request->data), true));
         $transaction->save();
     }
 }
