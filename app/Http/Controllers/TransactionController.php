@@ -10,10 +10,13 @@ class TransactionController extends Controller
 {
     public function callback(Request $request)
     {
-        Log::info(print_r($request->all(), true));
+
         $private_key = env('LIQPAY_PRIVATE_KEY');
         $data = base64_decode($request->data);
+        Log::info($data);
         if (base64_encode(sha1($private_key . $data . $private_key)) !== $request->signature) {
+            Log::info(base64_encode(sha1($private_key . $data . $private_key)));
+            Log::info($request->signature);
             abort(403, 'Forbidden');
         }
         Log::info(json_decode($data, true));
