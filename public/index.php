@@ -1,6 +1,5 @@
 <?php
 
-file_put_contents('log.txt', print_r($_REQUEST, true), FILE_APPEND);
 
 /**
  * Laravel - A PHP Framework For Web Artisans
