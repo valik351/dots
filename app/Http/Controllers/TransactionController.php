@@ -17,7 +17,7 @@ class TransactionController extends Controller
         Log::info($data);
         if ($liqpay->cnb_signature($data) !== $request->signature) {
             Log::info($liqpay->cnb_signature($data));
-            Log::info(base64_encode(sha1($private_key . json_encode($data) . $private_key, 1)));
+            Log::info(base64_encode(sha1($private_key . base64_decode($request->data) . $private_key, 1)));
             Log::info($request->signature);
             abort(403, 'Forbidden');
         }
