@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Course;
+use App\User;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,20 +25,22 @@ class CourseCheck
         ) {
             return redirect(action('CourseController@buy', ['course_id' => $course->id]));
         }
-        $requirements = $course->requiredCourses;
-        $required = collect();
-        foreach ($requirements as $requirement) {
-            if (!$requirement->users()
-                ->where('users.id', Auth::user()->id)
-                ->where('completed', true)
-                ->count()
-            ) {
-                $required->push($requirement);
+        if (!Auth::user()->hasRole(User::ROLE_CURATOR)) {
+            $requirements = $course->requiredCourses;
+            $required = collect();
+            foreach ($requirements as $requirement) {
+                if (!$requirement->users()
+                    ->where('users.id', Auth::user()->id)
+                    ->where('completed', true)
+                    ->count()
+                ) {
+                    $required->push($requirement);
+                }
             }
-        }
-        if ($required->isNotEmpty()) {
-            return redirect(action('CourseController@required', ['id' => $course->id]))
-                ->with(['requirements' => $required]);
+            if ($required->isNotEmpty()) {
+                return redirect(action('CourseController@required', ['id' => $course->id]))
+                    ->with(['requirements' => $required]);
+            }
         }
         return $next($request);
     }
