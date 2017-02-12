@@ -29,6 +29,9 @@ Route::group(['middleware' => 'access:web,1,'], function () {
             });
         });
     });
+    Route::group(['prefix' => 'transaction'], function () {
+        Route::get('result/{id}', 'TransactionController@result');
+    });
 });
 Route::get('/', 'HomeController@index');
 Auth::routes();

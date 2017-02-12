@@ -38,6 +38,7 @@ class CourseController extends Controller
                 'order_id' => implode('_', [$transaction->id, 'course', $course_id, 'user', Auth::user()->id, 'time', time()]),
                 'version' => '3',
                 'server_url' => action('TransactionController@callback'),
+                'result_url' => action('TransactionController@result', ['id' => $transaction->id]),
             ])
         ]);
     }

@@ -131,4 +131,14 @@ class Transaction extends Model
     {
         return in_array($this->status, ['success', 'sandbox']);
     }
+
+    public static function getOrderIdData($order_id)
+    {
+        $order_id = explode('_', $order_id);
+        return [
+            'id' => $order_id[0],
+            'user_id' => $order_id[array_search('user', $order_id) + 1],
+            'course_id' => $order_id[array_search('course', $order_id) + 1],
+        ];
+    }
 }
