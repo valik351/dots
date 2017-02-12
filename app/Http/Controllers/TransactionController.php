@@ -16,6 +16,7 @@ class TransactionController extends Controller
         $liqpay = new \LiqPay(env('LIQPAY_PUBLIC_KEY'), env('LIQPAY_PRIVATE_KEY'));
         Log::info($data);
         if ($liqpay->cnb_signature($data) !== $request->signature) {
+            Log::info($liqpay->cnb_signature($data));
             Log::info(base64_encode(sha1($private_key . json_encode($data) . $private_key, 1)));
             Log::info($request->signature);
             abort(403, 'Forbidden');
