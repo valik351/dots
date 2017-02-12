@@ -12,16 +12,16 @@ class TransactionController extends Controller
     {
 
         $private_key = env('LIQPAY_PRIVATE_KEY');
-        $data = base64_decode($request->data);
+        $data = json_decode(base64_decode($request->data), true);
+        $liqpay = new \LiqPay(env('LIQPAY_PUBLIC_KEY'), env('LIQPAY_PRIVATE_KEY'));
         Log::info($data);
-        if (base64_encode(sha1($private_key . $data . $private_key, 1)) !== $request->signature) {
+        if ($liqpay->cnb_signature($data) !== $request->signature) {
             Log::info(base64_encode(sha1($private_key . $data . $private_key, 1)));
             Log::info($request->signature);
             abort(403, 'Forbidden');
         }
-        Log::info(json_decode($data, true));
         $transaction = Transaction::findOrFail($request->order_id);
-        $transaction->fill(json_decode($data, true));
+        $transaction->fill($data);
         $transaction->save();
     }
 }
