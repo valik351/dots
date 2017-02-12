@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class ModuleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('course_check');
+    }
+
     public function show(Request $request, $course_id, $module_id) {
         return view('module.show', [
             'module' => Module::findOrFail($module_id),

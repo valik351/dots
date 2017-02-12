@@ -42,4 +42,13 @@ class CourseController extends Controller
             ])
         ]);
     }
+
+    public function required(Request $request, $id)
+    {
+        $required = $request->session()->get('requirements');
+        if(!$required || $required->isEmpty()) {
+            return redirect(action('CourseController@show', ['id' => $id]));
+        }
+        return view('course.required', ['courses' => $required]);
+    }
 }

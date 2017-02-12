@@ -12,9 +12,10 @@
 */
 Route::group(['middleware' => 'access:web,1,'], function () {
     Route::group(['prefix' => 'course/{course_id}'], function () {
-        Route::get('/', 'CourseController@show');
+        Route::get('/', 'CourseController@show')->middleware('course_check');
         Route::get('about', 'CourseController@about');
         Route::get('buy', 'CourseController@buy');
+        Route::get('required', 'CourseController@required');
 
         Route::group(['prefix' => 'module/{module_id}'], function () {
             Route::get('/', 'ModuleController@show');

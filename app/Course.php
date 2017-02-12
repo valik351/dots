@@ -39,23 +39,38 @@ class Course extends Model
 
     protected $fillable = ['name', 'description', 'content', 'duration', 'price'];
 
-    public function getAboutLinkAttribute() {
+    public function getAboutLinkAttribute()
+    {
         return action('CourseController@about', ['course_id' => $this->id]);
     }
 
-    public function getBuyLinkAttribute() {
+    public function getBuyLinkAttribute()
+    {
         return action('CourseController@buy', ['course_id' => $this->id]);
     }
 
-    public function getLinkAttribute() {
+    public function getLinkAttribute()
+    {
         return action('CourseController@show', ['course_id' => $this->id]);
     }
 
-    public function getPriceAttribute() {
+    public function getPriceAttribute()
+    {
         return Exchange::rate() * $this->attributes['price'];
     }
 
-    public function modules() {
+    public function modules()
+    {
         return $this->hasMany(Module::class);
+    }
+
+    public function requiredCourses()
+    {
+        return $this->belongsToMany(Course::class, 'course_requirements', 'course_id', 'required_course_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps()->withPivot('completed');
     }
 }
