@@ -27,10 +27,8 @@ Route::group(['middleware' => 'access:web,1,'], function () {
             Route::group(['prefix' => 'solution/{solution_id}'], function () {
                 Route::get('/', 'SolutionController@show');
             });
-
         });
     });
-
 });
 Route::get('/', 'HomeController@index');
 Auth::routes();

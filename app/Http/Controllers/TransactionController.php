@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Course;
 use App\Transaction;
+use App\User;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -14,8 +16,16 @@ class TransactionController extends Controller
             abort(403, 'Forbidden');
         }
         $data = json_decode(base64_decode($request->data), true);
-        $transaction = Transaction::findOrFail($data['order_id']);
+        $order_id = explode('_', $data['order_id']);
+        $transaction = Transaction::findOrFail($order_id[0]);
+
         $transaction->fill($data);
         $transaction->save();
+
+        if ($transaction->isSuccessful()) {
+            $user = User::findOrFail($order_id[array_search('user', $order_id) + 1]);
+            $course = Course::findOrFail($order_id[array_search('course', $order_id) + 1]);
+            $user->courses()->attach($course);
+        }
     }
 }
