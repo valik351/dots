@@ -14,8 +14,8 @@ class TransactionController extends Controller
         $private_key = env('LIQPAY_PRIVATE_KEY');
         $data = base64_decode($request->data);
         Log::info($data);
-        if (base64_encode(sha1($private_key . $data . $private_key)) !== $request->signature) {
-            Log::info(base64_encode(sha1($private_key . $data . $private_key)));
+        if (base64_encode(sha1($private_key . $data . $private_key, 1)) !== $request->signature) {
+            Log::info(base64_encode(sha1($private_key . $data . $private_key, 1)));
             Log::info($request->signature);
             abort(403, 'Forbidden');
         }
