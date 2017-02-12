@@ -119,5 +119,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Transaction extends Model
 {
-    protected $guarded = ['id'];
+    protected $fillable = ['err_code', 'err_description', 'version', 'status', 'type', 'err_erc', 'redirect_to', 'token'
+        , 'card_token', 'payment_id', 'public_key', 'acq_id', 'order_id', 'liqpay_order_id', 'description', 'sender_phone',
+        'sender_card_mask2', 'sender_card_bank', 'sender_card_country', 'ip', 'info', 'customer', 'amount', 'currency',
+        'sender_commission', 'receiver_commission', 'agent_commission', 'amount_debit', 'amount_credit', 'commission_debit',
+        'commission_credit', 'currency_debit', 'currency_credit', 'sender_bonus', 'amount_bonus', 'refund_amount',
+        'completion_date', 'authcode_debit', 'authcode_credit', 'rrn_debit', 'rrn_credit', 'arrn_debit', 'arrn_credit',
+        'verifycode', 'action', 'is_3ds', 'product_url', 'product_description'];
 }
