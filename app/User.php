@@ -76,6 +76,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Course::class)->withTimestamps();
     }
 
+    public function modules() {
+        return $this->belongsToMany(Module::class)->withTimestamps()->withPivot('completed');
+    }
+
     public function solutions() {
         return $this->hasMany(Solution::class);
     }

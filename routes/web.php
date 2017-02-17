@@ -18,6 +18,8 @@ Route::group(['middleware' => 'access:web,1,'], function () {
         Route::get('required', 'CourseController@required');
 
         Route::group(['prefix' => 'module/{module_id}'], function () {
+            Route::get('required', 'ModuleController@required');
+//            Route::group(['middleware' => 'course_check'], function () {
             Route::get('/', 'ModuleController@show');
 
             Route::group(['prefix' => 'problem/{problem_id}'], function () {
@@ -28,6 +30,7 @@ Route::group(['middleware' => 'access:web,1,'], function () {
             Route::group(['prefix' => 'solution/{solution_id}'], function () {
                 Route::get('/', 'SolutionController@show');
             });
+//            });
         });
     });
     Route::group(['prefix' => 'transaction'], function () {

@@ -27,6 +27,9 @@ class TransactionController extends Controller
             $user = User::findOrFail($order_id['user_id']);
             $course = Course::findOrFail($order_id['course_id']);
             $user->courses()->attach($course);
+            foreach ($course->modules as $module) {
+                $user->modules()->attach($module);
+            }
         }
     }
 

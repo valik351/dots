@@ -44,4 +44,13 @@ class Module extends Model
         return $this->belongsToMany(ProgrammingLanguage::class);
     }
 
+    public function requiredModules()
+    {
+        return $this->belongsToMany(Course::class, 'module_requirements', 'module_id', 'required_module_id');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class)->withTimestamps()->withPivot('completed');
+    }
 }
