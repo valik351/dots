@@ -19,5 +19,5 @@ elixir(mix => {
         .copy('node_modules/bootstrap-sass/assets/fonts', 'public/fonts')
         .webpack('app.js');
 
-    mix.copy('node_modules/ace-builds/src-min-noconflict', 'public/ace');
+    mix.copy('node_modules/ace-builds/src-min-noconflict', 'public/js/ace');
 });

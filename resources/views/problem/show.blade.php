@@ -1,16 +1,16 @@
 @extends('layouts.app')
 @section('scripts')
-    <script src="{{ asset('ace/ace.js') }}"></script>
-    <script src="{{ asset('ace/ext-language_tools.js') }}"></script>
+    <script src="{{ asset('js/ace/ace.js') }}"></script>
+    <script src="{{ asset('js/ace/ext-language_tools.js') }}"></script>
 @endsection
 @section('content')
     <div class="container">
         <div class="panel">
             <div class="panel-heading">
                 {{ $problem->name }}
-                <span class="float-xs-right">
+                <span class="pull-right">
                     @for($i = 0; $i < $problem->difficulty; $i++)
-                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="glyphicon glyphicon-star" ></i>
                     @endfor
                 </span>
             </div>

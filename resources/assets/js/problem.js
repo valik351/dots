@@ -1,18 +1,11 @@
 (function ($, window, document) {
     $(document).ready(function () {
         if ($('#editor').length) {
-            $('#editor').text(
-                '#include <iostream>' + '\n' + '\n' +
-                'using namespace std;' + '\n' + '\n' +
-                'int main() {' + '\n' + '\n' +
-                '\t' +'return 0;' + '\n' +
-                '}'
-            );
             var editor = ace.edit('editor');
             editor.setOptions({
                 enableBasicAutocompletion: true,
                 enableLiveAutocompletion: true,
-                showInvisibles: true,
+                // showInvisibles: true,
                 tabSize: 4,
                 wrap: true,
                 useSoftTabs: true,
@@ -23,7 +16,7 @@
                 name: "save",
                 bindKey: {win: "Ctrl-s", mac: "Command-s"},
                 exec: function () {
-                },
+                }
             });
 
 
