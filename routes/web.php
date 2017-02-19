@@ -37,5 +37,12 @@ Route::group(['middleware' => 'access:web,1,'], function () {
         Route::get('result/{id}', 'TransactionController@result');
     });
 });
+Route::group(['middleware' => 'access:web,0,' . App\User::ROLE_ADMIN, 'prefix' => 'dashboard'], function () {
+    Route::get('/', 'Backend\DashboardController@index');
+
+    Route::group(['prefix' => 'users'], function() {
+       Route::get('/', 'Backend\UserController@index');
+    });
+});
 Route::get('/', 'HomeController@index');
 Auth::routes();
