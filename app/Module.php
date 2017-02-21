@@ -29,18 +29,21 @@ class Module extends Model
 {
     protected $fillable = ['course_id', 'name', 'description'];
 
-    public function getLinkAttribute() {
+    public function getLinkAttribute()
+    {
         return action('ModuleController@show', [
             'module_id' => $this->id,
             'course_id' => \Request::route()->parameters()['course_id']
         ]);
     }
 
-    public function problems() {
+    public function problems()
+    {
         return $this->belongsToMany(Problem::class)->withPivot('display_id');
     }
 
-    public function programmingLanguages() {
+    public function programmingLanguages()
+    {
         return $this->belongsToMany(ProgrammingLanguage::class);
     }
 

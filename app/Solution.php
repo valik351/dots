@@ -119,11 +119,13 @@ class Solution extends Model
         ];
     }
 
-    public function getLinkAttribute() {
+    public function getLinkAttribute()
+    {
         return action('SolutionController@show', [
             'solution_id' => $this->id,
-            'module_id'   => \Request::route()->parameters()['module_id'],
-            'course_id'   => \Request::route()->parameters()['course_id'],
+            'problem_id' => $this->problem_id,
+            'module_id' => \Request::route()->parameters()['module_id'],
+            'course_id' => \Request::route()->parameters()['course_id'],
         ]);
     }
 
