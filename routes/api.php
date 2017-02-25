@@ -13,8 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 Route::group(['namespace' => 'Api'], function() {
-    Route::get('clients/auth/', 'ClientController@getToken')->middleware('auth.api_custom:null,App\Client,basic');
-    Route::get('testing-servers/auth/', 'TestingServerController@getToken')->middleware('auth.api_custom:null,App\TestingServer,basic');
+    Route::post('clients/auth/', 'ClientController@getToken')->middleware('auth.api_custom:null,App\Client,basic');
+    Route::post('testing-servers/auth/', 'TestingServerController@getToken')->middleware('auth.api_custom:null,App\TestingServer,basic');
 
     Route::group(['middleware' => 'auth.api_custom:null,App\TestingServer,bearer'], function () {
         Route::get('problems/{id}/tests-archive.tar.gz', 'ProblemController@getArchive');

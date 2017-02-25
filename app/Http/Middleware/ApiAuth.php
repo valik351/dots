@@ -15,8 +15,8 @@ class ApiAuth extends Authenticate
                 return $this->handleUnauthorizedRequest($request);
             }
         } else {
-            $model = forward_static_call([$class, 'where'], 'login', $request->getUser())->first();
-            if (!Hash::check($request->getPassword(), $model->password)) {
+            $model = forward_static_call([$class, 'where'], 'login', $request->get('login'))->first();
+            if (!Hash::check($request->get('password'), $model->password)) {
                 return $this->handleUnauthorizedRequest($request);
             }
         }

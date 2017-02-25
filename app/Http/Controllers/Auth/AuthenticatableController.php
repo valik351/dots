@@ -11,7 +11,7 @@ abstract class AuthenticatableController extends Controller
 
     public function getToken(Request $request)
     {
-        $model = forward_static_call([$this->getModel(), 'where'], 'login', $request->getUser())->first();
+        $model = forward_static_call([$this->getModel(), 'where'], 'login', $request->get('login'))->first();
         if (!$model->isTokenValid()) {
             $model->api_token = forward_static_call([static::getModel(), 'generateApiToken']);
             $model->save();
