@@ -43,7 +43,9 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;<li><a href="{{ action('Backend\UserController@index') }}">Users</a></li>
+                        <li class="{{ Request::fullUrl() == action('Backend\UserController@index') ? 'active' : '' }}">
+                            <a href="{{ action('Backend\UserController@index') }}">Users</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -72,7 +74,16 @@
                 </div>
             </div>
         </nav>
-
+        @if(Session::has('alert'))
+        <div class="container">
+            <div class="alert alert-{{ Session::get('alert')['type'] }} alert-dismissible" role="alert" style="text-align: center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                {{ Session::get('alert')['message'] }}
+            </div>
+        </div>
+        @endif
         @yield('content')
     </div>
 

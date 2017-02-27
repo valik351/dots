@@ -42,7 +42,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'role'
     ];
 
     /**
@@ -82,6 +82,14 @@ class User extends Authenticatable
 
     public function solutions() {
         return $this->hasMany(Solution::class);
+    }
+
+    public static function roles() {
+        return [
+            self::ROLE_ADMIN,
+            self::ROLE_USER,
+            self::ROLE_CURATOR,
+        ];
     }
 
     public function hasAccessToCourse(Course $course) {

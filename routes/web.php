@@ -41,6 +41,10 @@ Route::group(['middleware' => 'access:web,0,' . App\User::ROLE_ADMIN, 'prefix' =
 
     Route::group(['prefix' => 'users'], function() {
        Route::get('/', 'Backend\UserController@index');
+       Route::get('/form/{id?}', 'Backend\UserController@showForm');
+       Route::post('/{id}', 'Backend\UserController@update');
+       Route::post('/', 'Backend\UserController@create');
+       Route::post('/delete/{id}', 'Backend\UserController@delete');
     });
 });
 Route::get('/', 'HomeController@index');
