@@ -19,7 +19,7 @@ class TransactionController extends Controller
         }
         
         return view('admin.transactions.index', [
-            'transactions' => $transactions->orederBy('id', 'desc')->paginate(10),
+            'transactions' => $transactions->orderBy('id', 'desc')->paginate(10),
             'transaction_attributes' => $transaction_attributes
         ]);
     }
