@@ -44,7 +44,10 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li class="{{ Request::fullUrl() == action('Backend\UserController@index') ? 'active' : '' }}">
-                            <a href="{{ action('Backend\UserController@index') }}">Users</a>
+                            <a href="{{ action('Backend\UserController@index') }}">Пользователи</a>
+                        </li>
+                        <li class="{{ Request::fullUrl() == action('Backend\TransactionController@index') ? 'active' : '' }}">
+                            <a href="{{ action('Backend\TransactionController@index') }}">Транзакции</a>
                         </li>
                     </ul>
 
