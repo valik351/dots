@@ -15,9 +15,9 @@ class TransactionController extends Controller
         $transactions = Transaction::query();
 
         foreach ($transaction_attributes as $item) {
-            $transactions->where($item, 'like', '%' . $request->get('search', '') . '%');
+            $transactions->orWhere($item, 'like', '%' . $request->get('search', '') . '%');
         }
-        
+        $transactions->toSql();
         
         return view('admin.transactions.index', [
             'transactions' => $transactions->paginate(10),
